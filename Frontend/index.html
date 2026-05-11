@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tienda de Componentes PC</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>🖥️ Tienda de Componentes</h1>
+
+  <!-- Formulario para crear/editar -->
+  <section id="formulario-seccion">
+    <h2 id="form-titulo">Agregar Producto</h2>
+    <form id="form-producto">
+      <input type="hidden" id="producto-id">
+      <input type="text"   id="nombre"     placeholder="Nombre"     required>
+      <select id="categoria">
+        <option value="">-- Categoría --</option>
+        <option value="CPU">CPU</option>
+        <option value="GPU">GPU</option>
+        <option value="RAM">RAM</option>
+        <option value="Almacenamiento">Almacenamiento</option>
+        <option value="Periférico">Periférico</option>
+        <option value="Otro">Otro</option>
+      </select>
+      <input type="number" id="precio"     placeholder="Precio ($)" required>
+      <input type="number" id="stock"      placeholder="Stock">
+      <textarea id="descripcion" placeholder="Descripción"></textarea>
+      <button type="submit" id="btn-submit">Agregar</button>
+      <button type="button" id="btn-cancelar" style="display:none">Cancelar</button>
+    </form>
+  </section>
+
+  <!-- Tabla de productos -->
+  <section id="tabla-seccion">
+    <h2>Productos disponibles</h2>
+    <table id="tabla-productos">
+      <thead>
+        <tr>
+          <th>ID</th><th>Nombre</th><th>Categoría</th>
+          <th>Precio</th><th>Stock</th><th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody id="cuerpo-tabla"></tbody>
+    </table>
+  </section>
+
+  <script src="app.js"></script>
+</body>
+</html>
