@@ -209,7 +209,7 @@
    .btn-primary {
      background: var(--accent);
      color: #020810;
-     box-shadow: 0 0 12px #3700ff40;
+     box-shadow: 0 0 12px #00d4ff40;
    }
    .btn-primary:hover {
      background: #33ddff;
@@ -287,8 +287,8 @@
      to   { opacity: 1; transform: translateY(0); }
    }
    
-   /* ── Buscador ──────────────────────────────── */
-   .tabla-header {
+   /* ── Topbar productos ──────────────────────── */
+   .productos-topbar {
      display: flex;
      align-items: center;
      justify-content: space-between;
@@ -297,9 +297,24 @@
      gap: 12px;
    }
    
+   .topbar-controls {
+     display: flex;
+     align-items: center;
+     gap: 10px;
+     flex-wrap: wrap;
+   }
+   
+   .filtro-select {
+     width: auto;
+     font-size: 0.82rem;
+     padding: 8px 12px;
+     color: var(--text-secondary);
+   }
+   
+   /* ── Buscador ──────────────────────────────── */
    .search-box {
      position: relative;
-     width: 260px;
+     width: 210px;
    }
    
    .search-box input {
@@ -315,6 +330,137 @@
      color: var(--text-muted);
      font-size: 0.9rem;
      pointer-events: none;
+   }
+   
+   /* ── Tab toggle ────────────────────────────── */
+   .tab-toggle {
+     display: flex;
+     background: var(--bg-base);
+     border: 1px solid var(--border);
+     border-radius: var(--radius);
+     overflow: hidden;
+   }
+   
+   .tab-btn {
+     background: transparent;
+     border: none;
+     color: var(--text-secondary);
+     cursor: pointer;
+     font-family: var(--font-main);
+     font-size: 0.82rem;
+     font-weight: 600;
+     letter-spacing: 0.3px;
+     padding: 8px 16px;
+     transition: var(--transition);
+   }
+   
+   .tab-btn:hover { color: var(--text-primary); background: #ffffff08; }
+   
+   .tab-btn.active {
+     background: var(--accent);
+     color: #020810;
+   }
+   
+   /* ── Grid de cartas ────────────────────────── */
+   .productos-grid {
+     display: grid;
+     grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+     gap: 16px;
+     padding-top: 4px;
+   }
+   
+   .product-card {
+     background: var(--bg-base);
+     border: 1px solid var(--border);
+     border-radius: var(--radius-lg);
+     overflow: hidden;
+     transition: var(--transition);
+     display: flex;
+     flex-direction: column;
+   }
+   
+   .product-card:hover {
+     border-color: var(--border-glow);
+     box-shadow: var(--shadow-glow);
+     transform: translateY(-3px);
+   }
+   
+   .card-icon {
+     height: 110px;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     font-size: 3.2rem;
+     position: relative;
+     overflow: hidden;
+   }
+   
+   .card-icon-cpu  { background: linear-gradient(135deg, #1a0e08, #2a1008); }
+   .card-icon-gpu  { background: linear-gradient(135deg, #130e1f, #1e1030); }
+   .card-icon-ram  { background: linear-gradient(135deg, #071a0f, #0a2615); }
+   .card-icon-alm  { background: linear-gradient(135deg, #1a1500, #261e00); }
+   .card-icon-peri { background: linear-gradient(135deg, #061519, #081d24); }
+   .card-icon-otro { background: linear-gradient(135deg, #111318, #161b22); }
+   
+   .card-icon::after {
+     content: '';
+     position: absolute;
+     bottom: 0; left: 0; right: 0;
+     height: 2px;
+   }
+   .card-icon-cpu::after  { background: #ff6b35; box-shadow: 0 0 10px #ff6b3580; }
+   .card-icon-gpu::after  { background: #c084fc; box-shadow: 0 0 10px #c084fc80; }
+   .card-icon-ram::after  { background: #00e676; box-shadow: 0 0 10px #00e67680; }
+   .card-icon-alm::after  { background: #ffd740; box-shadow: 0 0 10px #ffd74080; }
+   .card-icon-peri::after { background: #00d4ff; box-shadow: 0 0 10px #00d4ff80; }
+   .card-icon-otro::after { background: #6b7280; }
+   
+   .card-body {
+     padding: 14px 16px;
+     flex: 1;
+     display: flex;
+     flex-direction: column;
+     gap: 6px;
+   }
+   
+   .card-nombre {
+     font-size: 0.92rem;
+     font-weight: 700;
+     color: var(--text-primary);
+     line-height: 1.3;
+   }
+   
+   .card-desc {
+     font-size: 0.78rem;
+     color: var(--text-secondary);
+     line-height: 1.4;
+     flex: 1;
+     display: -webkit-box;
+     -webkit-line-clamp: 2;
+     -webkit-box-orient: vertical;
+     overflow: hidden;
+   }
+   
+   .card-precio {
+     font-family: var(--font-mono);
+     font-size: 1.05rem;
+     font-weight: 500;
+     color: var(--yellow);
+     margin-top: 4px;
+   }
+   
+   .card-footer {
+     display: flex;
+     gap: 8px;
+     padding: 10px 16px 14px;
+     border-top: 1px solid var(--border);
+   }
+   
+   .card-footer .btn {
+     flex: 1;
+     justify-content: center;
+     padding: 7px 10px;
+     font-size: 0.78rem;
    }
    
    /* ── Tabla ─────────────────────────────────── */
@@ -429,3 +575,31 @@
      .tabla-header { flex-direction: column; align-items: flex-start; }
      .search-box { width: 100%; }
    }
+   /* ── Estilos para Imágenes ────────────────── */
+.thumb-img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+  }
+  
+  .card-img-container {
+    height: 150px;
+    width: 100%;
+    overflow: hidden;
+    background: var(--bg-card2);
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+  
+  .card-img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+  
+  .product-card:hover .card-img-container img {
+    transform: scale(1.05); /* Pequeño zoom al pasar el mouse */
+  }

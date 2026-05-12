@@ -36,33 +36,41 @@ app.get('/productos/:id', (req, res) => {
 // POST /productos — Crear un nuevo producto
 // ─────────────────────────────────────────────
 app.post('/productos', (req, res) => {
-  const { nombre, categoria, precio, stock, descripcion } = req.body;
-
-  if (!nombre || !categoria || !precio) {
-    return res.status(400).json({ error: 'Nombre, categoría y precio son obligatorios' });
-  }
-
-  const sql = 'INSERT INTO productos (nombre, categoria, precio, stock, descripcion) VALUES (?, ?, ?, ?, ?)';
-  db.query(sql, [nombre, categoria, precio, stock || 0, descripcion || ''], (err, resultado) => {
-    if (err) return res.status(500).json({ error: err.message });
-    res.status(201).json({ mensaje: 'Producto creado', id: resultado.insertId });
+    // 1. Agregamos "imagen" aquí
+    const { nombre, categoria, precio, stock, descripcion, imagen } = req.body;
+  
+    if (!nombre || !categoria || !precio) {
+      return res.status(400).json({ error: 'Nombre, categoría y precio son obligatorios' });
+    }
+  
+    // 2. Agregamos "imagen" y un "?" extra en la consulta SQL
+    const sql = 'INSERT INTO productos (nombre, categoria, precio, stock, descripcion, imagen) VALUES (?, ?, ?, ?, ?, ?)';
+    
+    // 3. Pasamos la variable "imagen" al final del array
+    db.query(sql, [nombre, categoria, precio, stock || 0, descripcion || '', imagen || ''], (err, resultado) => {
+      if (err) return res.status(500).json({ error: err.message });
+      res.status(201).json({ mensaje: 'Producto creado', id: resultado.insertId });
+    });
   });
-});
 
 // ─────────────────────────────────────────────
 // PUT /productos/:id — Actualizar un producto
 // ─────────────────────────────────────────────
 app.put('/productos/:id', (req, res) => {
-  const { id } = req.params;
-  const { nombre, categoria, precio, stock, descripcion } = req.body;
-
-  const sql = 'UPDATE productos SET nombre=?, categoria=?, precio=?, stock=?, descripcion=? WHERE id=?';
-  db.query(sql, [nombre, categoria, precio, stock, descripcion, id], (err, resultado) => {
-    if (err) return res.status(500).json({ error: err.message });
-    if (resultado.affectedRows === 0) return res.status(404).json({ mensaje: 'Producto no encontrado' });
-    res.json({ mensaje: 'Producto actualizado correctamente' });
+    const { id } = req.params;
+    // 1. Agregamos "imagen" aquí
+    const { nombre, categoria, precio, stock, descripcion, imagen } = req.body;
+  
+    // 2. Sumamos "imagen=?" al final de los SET
+    const sql = 'UPDATE productos SET nombre=?, categoria=?, precio=?, stock=?, descripcion=?, imagen=? WHERE id=?';
+    
+    // 3. Colocamos "imagen" antes del "id" en el array de valores
+    db.query(sql, [nombre, categoria, precio, stock, descripcion, imagen, id], (err, resultado) => {
+      if (err) return res.status(500).json({ error: err.message });
+      if (resultado.affectedRows === 0) return res.status(404).json({ mensaje: 'Producto no encontrado' });
+      res.json({ mensaje: 'Producto actualizado correctamente' });
+    });
   });
-});
 
 // ─────────────────────────────────────────────
 // DELETE /productos/:id — Eliminar un producto

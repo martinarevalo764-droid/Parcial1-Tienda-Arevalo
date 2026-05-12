@@ -20,7 +20,6 @@
     <!-- Formulario -->
     <div class="card">
       <p class="card-title" id="form-titulo">Agregar Producto</p>
-
       <form id="form-producto">
         <input type="hidden" id="producto-id">
 
@@ -46,6 +45,10 @@
           <label for="precio">Precio ($)</label>
           <input type="number" id="precio" placeholder="Ej: 250000" min="0" required>
         </div>
+        <div class="form-group span-2">
+            <label for="imagen">URL de la Imagen</label>
+            <input type="url" id="imagen" placeholder="Ej: https://link-a-la-imagen.com/rtx4070.jpg">
+          </div>
 
         <div class="form-group">
           <label for="stock">Stock</label>
@@ -58,57 +61,68 @@
         </div>
 
         <div class="btn-group">
-          <button type="button" class="btn btn-secondary" id="btn-cancelar" style="display:none">
-            ✕ Cancelar
-          </button>
-          <button type="submit" class="btn btn-primary" id="btn-submit">
-            + Agregar producto
-          </button>
+          <button type="button" class="btn btn-secondary" id="btn-cancelar" style="display:none">✕ Cancelar</button>
+          <button type="submit" class="btn btn-primary" id="btn-submit">+ Agregar producto</button>
         </div>
       </form>
     </div>
 
-    <!-- Tabla -->
+    <!-- Sección de productos con pestañas -->
     <div class="card">
-      <div class="tabla-header">
+
+      <!-- Barra superior -->
+      <div class="productos-topbar">
         <p class="card-title" style="margin-bottom:0">Productos disponibles</p>
-        <div class="search-box">
-          <span class="icon-search">🔍</span>
-          <input type="text" id="buscador" placeholder="Buscar producto...">
+
+        <div class="topbar-controls">
+          <select id="filtro-categoria" class="filtro-select">
+            <option value="">Todas las categorías</option>
+            <option value="CPU">CPU</option>
+            <option value="GPU">GPU</option>
+            <option value="RAM">RAM</option>
+            <option value="Almacenamiento">Almacenamiento</option>
+            <option value="Periférico">Periférico</option>
+            <option value="Otro">Otro</option>
+          </select>
+
+          <div class="search-box">
+            <span class="icon-search">🔍</span>
+            <input type="text" id="buscador" placeholder="Buscar producto...">
+          </div>
+
+          <div class="tab-toggle">
+            <button class="tab-btn active" id="tab-lista"   onclick="cambiarVista('lista')"  title="Vista lista">☰ Lista</button>
+            <button class="tab-btn"        id="tab-tienda"  onclick="cambiarVista('tienda')" title="Vista tienda">⊞ Tienda</button>
+          </div>
         </div>
       </div>
 
-      <div class="table-wrapper">
-        <table id="tabla-productos">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Nombre</th>
-              <th>Categoría</th>
-              <th>Precio</th>
-              <th>Stock</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody id="cuerpo-tabla">
-            <tr>
-              <td colspan="6">
-                <div class="empty-state">
-                  <div class="icon">⚙️</div>
-                  <p>Cargando productos...</p>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <!-- Vista Lista -->
+      <div id="vista-lista">
+        <div class="table-wrapper">
+          <table id="tabla-productos">
+            <thead>
+              <tr>
+                <th>#</th><th>Nombre</th><th>Categoría</th>
+                <th>Precio</th><th>Stock</th><th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="cuerpo-tabla">
+              <tr><td colspan="6"><div class="empty-state"><div class="icon">⚙️</div><p>Cargando...</p></div></td></tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
 
+      <!-- Vista Tienda -->
+      <div id="vista-tienda" style="display:none">
+        <div id="grid-productos" class="productos-grid"></div>
+      </div>
+
+    </div>
   </div>
 
-  <!-- Toast de notificaciones -->
   <div id="toast"></div>
-
   <script src="app.js"></script>
 </body>
 </html>
