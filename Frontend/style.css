@@ -603,3 +603,28 @@
   .product-card:hover .card-img-container img {
     transform: scale(1.05); /* Pequeño zoom al pasar el mouse */
   }
+  .thumb-img {
+    width: 45px;
+    height: 45px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+  }
+  
+  .card-img-container {
+    height: 160px;
+    width: 100%;
+    overflow: hidden;
+    background: var(--bg-card2);
+  }
+  
+  .card-img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+  
+  .product-card:hover .card-img-container img {
+    transform: scale(1.08);
+  }

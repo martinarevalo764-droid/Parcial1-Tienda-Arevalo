@@ -57,7 +57,7 @@ function renderizarTabla(productos) {
     <td>${p.id}</td>
     <td>
       <div style="display:flex; align-items:center; gap:10px;">
-        <img src="${p.imagen || 'https://via.placeholder.com/40?text=PC'}" class="thumb-img" alt="img">
+        <img src="${p.imagen || 'https://via.placeholder.com/50'}" class="thumb-img" alt="${p.nombre}">
         ${p.nombre}
       </div>
     </td>
@@ -90,8 +90,8 @@ function renderizarGrid(productos) {
     card.className = 'product-card';
     card.innerHTML = `
       <div class="card-img-container">
-        <img src="${p.imagen || 'https://via.placeholder.com/300x150?text=Sin+Imagen'}" alt="${p.nombre}">
-      </div>
+    <img src="${p.imagen || 'https://via.placeholder.com/300x160?text=Sin+Imagen'}" alt="${p.nombre}">
+  </div>
       <div class="card-body">
         <div>${badgeCategoria(p.categoria)}</div>
         <p class="card-nombre">${p.nombre}</p>
@@ -150,7 +150,7 @@ document.getElementById('form-producto').addEventListener('submit', async (e) =>
     precio:      document.getElementById('precio').value,
     stock:       document.getElementById('stock').value || 0,
     descripcion: document.getElementById('descripcion').value.trim(),
-    imagen:      document.getElementById('imagen').value.trim(),
+    imagen:      document.getElementById('imagen').value.trim()
   };
 
   if (!datos.nombre)    return mostrarToast('El nombre es obligatorio', 'error');
