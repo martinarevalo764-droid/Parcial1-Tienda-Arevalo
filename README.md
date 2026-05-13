@@ -35,8 +35,8 @@ Tienda-Componentes/
 └── Frontend/
     ├── index.html
     ├── app.js           # logica del frontend con fetch
-    ├── style.css
-    └── logo.png
+    └── style.css
+
 ```
  
 ---
@@ -50,7 +50,8 @@ Tienda-Componentes/
 ### 1. Crear la base de datos
  
 Abrir phpMyAdmin, crear una base de datos llamada `tienda_componentes`
-y ejecutar el siguiente SQL:
+y ejecutar el siguiente SQL:                      
+
  
 ```sql
 CREATE TABLE productos (
@@ -76,8 +77,6 @@ DB_NAME=tienda_componentes
 PORT=3001
 ```
  
-La contrasena se deja vacia porque XAMPP no tiene contrasena por defecto en root.
-Si se configuro una contrasena distinta, colocarla ahi.
  
 ### 3. Instalar dependencias y levantar el backend
  
@@ -136,27 +135,6 @@ Base URL: `http://localhost:3001`
 - Boton para eliminar con confirmacion
 - Notificaciones tipo toast para feedback al usuario
 - Indicador visual de stock bajo (menos de 5 unidades)
----
- 
-## Decisiones tecnicas
- 
-Se uso **mysql2 con callbacks** en lugar de promesas o async/await porque es el
-enfoque mas directo para un CRUD simple, y facilita ver el flujo de la consulta
-sin capas adicionales de abstraccion.
- 
-Las consultas SQL usan **parametros con signos de pregunta** (`?`) para evitar
-inyeccion SQL, en lugar de concatenar strings directamente.
- 
-El campo `imagen` acepta una URL de imagen externa en lugar de subir archivos al
-servidor, lo que simplifica bastante el backend y es suficiente para el alcance
-del proyecto.
- 
-Se habilio **CORS** en el backend para que el frontend estatico (abierto como
-archivo local) pueda hacer peticiones sin problemas de seguridad del navegador.
- 
-El frontend no usa ningun framework porque la consigna pide JavaScript vanilla.
-Toda la logica de renderizado y consumo de la API esta en `app.js`.
- 
 ---
  
 ## Autor
